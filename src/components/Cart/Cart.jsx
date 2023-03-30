@@ -7,8 +7,10 @@ const Cart = ({ cart }) => {
     // console.log(cart)
     let total = 0;
     let shipping = 0;
+    let quantity = 0;
     cart.map(item => {
-        total = total + item.price;
+        quantity = quantity + item.quantity;
+        total = total + item.price * item.quantity;
         shipping = shipping + item.shipping;
     })
     const tax = total * 0.1;
@@ -16,7 +18,7 @@ const Cart = ({ cart }) => {
     return (
         <div className='cart-container'>
             <h2>Order summary</h2>
-            <p>Selected items: {cart.length}</p>
+            <p>Selected items: {quantity}</p>
             <p>Total Price: ${total.toFixed(2)}</p>
             <p>Total Shipping Charge: ${shipping}</p>
             <p>Tax: ${tax.toFixed(2)} </p>

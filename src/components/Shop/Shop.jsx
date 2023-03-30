@@ -8,10 +8,18 @@ import './Shop.css'
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([])
-    const handleAddToCart = (product) => {
-        const newCart = [...cart, product];
-        setCart(newCart)
-        addToDb(product.id)
+
+    const handleAddToCart = (selectedProduct) => {
+        const exists = cart.find(product => product.id === selectedProduct.id)
+        if (exists) {
+            exists.quantity = exists.quantity + 1;
+            const rest = cart.filter(product => product.id !== selectedProduct.id)
+            setCart([...rest, exists])
+        } else {
+            selectedProduct.quantity = 1;
+            setCart([...cart, selectedProduct])
+        }
+        addToDb(selectedProduct.id)
     }
     useEffect(() => {
         fetch('product.json')
@@ -20,7 +28,7 @@ const Shop = () => {
     }, [])
     useEffect(() => {
         const storedCart = getCart();
-        console.log(storedCart)
+        // console.log(storedCart)
         const savedProducts = []
         for (const id in storedCart) {
             const saveProduct = products.find(product => product.id === id)
