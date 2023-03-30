@@ -1,0 +1,19 @@
+.cart-container {
+    background-color: #ffe0b2;
+    position: sticky;
+    top: 0;
+    padding: 20px 40px;
+    height: 100vh;
+}
+
+.cart-container h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.cart-container button {
+    width: 232px;
+    height: 48px;
+    background-color: #ff3030;
+    color: white;
+}
