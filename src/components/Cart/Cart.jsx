@@ -4,14 +4,23 @@ import React from 'react';
 import './Cart.css'
 
 const Cart = ({ cart }) => {
+    // console.log(cart)
+    let total = 0;
+    let shipping = 0;
+    cart.map(item => {
+        total = total + item.price;
+        shipping = shipping + item.shipping;
+    })
+    const tax = total * 0.1;
+    const grandTotal = total + tax + shipping;
     return (
         <div className='cart-container'>
             <h2>Order summary</h2>
             <p>Selected items: {cart.length}</p>
-            <p>Total Price:</p>
-            <p>Total Shipping Charge:</p>
-            <p>Tax: </p>
-            <h2>Grand Total:</h2>
+            <p>Total Price: ${total.toFixed(2)}</p>
+            <p>Total Shipping Charge: ${shipping}</p>
+            <p>Tax: ${tax.toFixed(2)} </p>
+            <h3>Grand Total: ${grandTotal.toFixed(2)}</h3>
             <button>
                 Clear Cart
                 <FontAwesomeIcon style={{ marginLeft: '10px' }} icon={faTrash}></FontAwesomeIcon>

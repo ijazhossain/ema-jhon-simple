@@ -11,6 +11,10 @@
     text-align: center;
 }
 
+.cart-container h3 {
+    text-align: center;
+}
+
 .cart-container button {
     width: 232px;
     height: 48px;
