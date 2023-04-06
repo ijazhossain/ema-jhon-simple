@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addToDb, getCart } from '../../utilities/fakeDB';
+import { addToDb, deleteCartFromDb, getCart } from '../../utilities/fakeDB';
 import Cart from '../Cart/Cart';
 
 import Product from '../Product/Product';
@@ -20,6 +20,10 @@ const Shop = () => {
             setCart([...cart, selectedProduct])
         }
         addToDb(selectedProduct.id)
+    }
+    const deleteCart = () => {
+        setCart([])
+        deleteCartFromDb()
     }
     useEffect(() => {
         fetch('product.json')
@@ -54,7 +58,10 @@ const Shop = () => {
                 }
             </div>
             <div className='order-summary'>
-                <Cart cart={cart}></Cart>
+                <Cart
+                    cart={cart}
+                    deleteCart={deleteCart}
+                ></Cart>
             </div>
         </div>
     );
