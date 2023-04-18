@@ -4,8 +4,11 @@ import googleImg from '../../assets/google.png'
 import { AuthContext } from '../../providers/AuthProvider';
 
 const Register = () => {
-    const { user, createUser } = useContext(AuthContext)
+    const { user, createUser, googleSignIn, loading } = useContext(AuthContext)
     // console.log(createUser);
+    if (loading) {
+        return <h1 className='loading'>Loading...</h1>
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -25,6 +28,15 @@ const Register = () => {
                 form.reset()
             }).catch(error => {
                 console.error(error)
+            })
+    }
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user
+                console.log(user)
+            }).catch(error => {
+                console.log(error)
             })
     }
     return (
@@ -58,7 +70,7 @@ const Register = () => {
                     <div className='or-div-line'></div>
                 </div>
 
-                <button className='user-btn'>
+                <button onClick={handleGoogleLogin} className='user-btn'>
                     <img src={googleImg} alt="google photo" />
                     <p>Continue with Google</p>
                 </button>

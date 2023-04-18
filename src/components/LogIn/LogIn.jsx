@@ -5,10 +5,13 @@ import googleImg from '../../assets/google.png'
 import { AuthContext } from '../../providers/AuthProvider';
 
 const LogIn = () => {
-    const { user, userSignIn } = useContext(AuthContext)
+    const { user, userSignIn, googleSignIn, loading } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from?.pathname || '/';
+    if (loading) {
+        return <h1 className='loading'>Loading...</h1>
+    }
     const handleSignInSubmit = (event) => {
         event.preventDefault()
         const form = event.target;
@@ -23,6 +26,16 @@ const LogIn = () => {
                 navigate(from, { replace: true });
             }).catch(error => {
                 console.error(error)
+            })
+    }
+    const handleGoogleLogin = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                navigate(from, { replace: true });
+            }).catch(error => {
+                console.log(error)
             })
     }
     return (
@@ -48,7 +61,7 @@ const LogIn = () => {
                     <div className='or-div-line'></div>
                 </div>
 
-                <button className='user-btn'>
+                <button onClick={handleGoogleLogin} className='user-btn'>
                     <img src={googleImg} alt="google photo" />
                     <p>Continue with Google</p>
                 </button>

@@ -103,3 +103,11 @@
     font-size: 17px;
 
 }
+
+.loading {
+    height: calc(100vh - 240px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: orange;
+}
