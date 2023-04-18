@@ -14,3 +14,13 @@
     margin-left: 32px;
     color: white;
 }
+
+.signOut-btn {
+    margin-left: 20px;
+    background-color: orange;
+}
+
+.email-text {
+    color: orange;
+    margin: 0 8px;
+}
