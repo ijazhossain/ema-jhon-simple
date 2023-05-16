@@ -81,7 +81,7 @@ const Shop = () => {
             })
         // console.log(storedCart)
 
-    }, [products])
+    }, [])
 
     return (
         <>
